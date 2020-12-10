@@ -1,6 +1,7 @@
 package com.xlzhou.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.xlzhou.system.common.Constant;
 import com.xlzhou.system.common.DataGridView;
 import com.xlzhou.system.vo.DeptVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
     @Override
     public DataGridView queryAllDept(DeptVo deptVo) {
         QueryWrapper<Dept> qw = new QueryWrapper<>();
+        if(deptVo.getIsAvailable()==0){
+            qw.eq("available", Constant.AVAILABLE_TRUE);
+        }
         qw.orderByAsc("ordernum");
         List<Dept> depts = this.deptMapper.selectList(qw);
         DataGridView dataGridView = new DataGridView(Long.valueOf(depts.size()), depts);

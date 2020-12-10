@@ -163,7 +163,7 @@ public class ShiroAutoConfiguration {
 
 
     /**
-     * 使用Redis  来存储登录的信息
+     * 使用Redis  来存储登录的信息 长时间未操作退出登录
      *sessionDao 还需要设置给sessionManager
      */
     @Bean
@@ -171,7 +171,7 @@ public class ShiroAutoConfiguration {
         System.out.println("进入ShiroAutoConfigurationr类redisSessionDAO方法");
         RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
         redisSessionDAO.setRedisManager(redisManager); //操作那个redis
-        redisSessionDAO.setExpire(7*24*3600); // 用户的登录信息保存多久？ 7 天
+        redisSessionDAO.setExpire(3600*10); // 用户的登录信息保存多久？ 7 天
         //       redisSessionDAO.setKeySerializer(keySerializer); jdk
         //       redisSessionDAO.setValueSerializer(valueSerializer);jdk
         return redisSessionDAO ;

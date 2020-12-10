@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @Auther: zxl
  * @Date: 2020/12/7  - 10:41
@@ -36,6 +38,19 @@ public class MenuController {
     }
 
     /**
+     * 查询菜单
+     *
+     * @param menuVo
+     * @return
+     */
+    @RequestMapping("loadMenu")
+    public Object loadMenu(MenuVo menuVo) {
+        List<Menu> menuList = this.menuService.queryAllMenuForList();
+        DataGridView dataGridView = new DataGridView(Long.valueOf(menuList.size()),menuList);
+        return dataGridView;
+    }
+
+    /**
      * 查询菜单和权限最大的排序码
      */
     @RequestMapping("queryMenuMaxOrderNum")
@@ -53,7 +68,10 @@ public class MenuController {
     @RequestMapping("addMenu")
     public ResultBean addMenu(Menu menu) {
         try {
-            menu.setSpread(Constant.SPREAD_FALSE);
+            if("topmenu".equals(menu.getType())){
+                menu.setPid(0);
+            }
+            menu.setSpread(Constant.SPREAD_TRUE);
             menu.setAvailable(Constant.AVAILABLE_TRUE);
             Menu d = this.menuService.saveMenu(menu);
             return ResultBean.ADD_SUCCESS;
@@ -74,6 +92,9 @@ public class MenuController {
     @RequestMapping("updateMenu")
     public ResultBean updateMenu(Menu menu) {
         try {
+            if("topmenu".equals(menu.getType())){
+                menu.setPid(0);
+            }
             Menu d = this.menuService.updateMenu(menu);
             return ResultBean.UPDATE_SUCCESS;
         } catch (Exception e) {

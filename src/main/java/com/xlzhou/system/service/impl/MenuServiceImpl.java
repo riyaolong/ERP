@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.Serializable;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -72,13 +73,19 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     public Integer queryMenuMaxOrderNum() {
-        return null;
+       Integer num =  this.menuMapper.queryMenuMaxOrderNum();
+        return num;
     }
 
     @Override
     public Menu saveMenu(Menu menu) {
         this.menuMapper.insert(menu);
         return menu;
+    }
+
+    @Override
+    public Menu getById(Serializable id) {
+        return super.getById(id);
     }
 
     @Override
@@ -89,6 +96,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     public Integer queryMenuChildrenCountById(Integer id) {
-        return null;
+        Integer num = this.menuMapper.queryMenuChildrenCountById(id);
+        return num;
     }
 }

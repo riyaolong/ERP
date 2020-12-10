@@ -83,12 +83,12 @@ permission:menu:addMenu
     @TableField(value = "available")
     private Integer available;
 
-    @TableField(exist = false)
-    private Boolean open;
-
-    public Boolean getOpen() {
-        return this.spread== 1?true:false;
-    }
+//    @TableField(exist = false)
+//    private Boolean open;
+//
+//    public Boolean getOpen() {
+//        return this.spread== 1?true:false;
+//    }
 
 
     public Menu(Integer id, Integer pid, String type, String typecode, String title, Integer ordernum, Integer available) {

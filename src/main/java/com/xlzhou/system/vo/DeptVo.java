@@ -14,4 +14,6 @@ public class DeptVo  extends BaseVo{
 
     private String title;
 
+    private Integer isAvailable;
+
 }

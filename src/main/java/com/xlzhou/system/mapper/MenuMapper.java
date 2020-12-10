@@ -8,4 +8,7 @@ import com.xlzhou.system.domain.Menu;
 * @Date: 2020/11/23 - 11 - 23 - 14:23
 */
 public interface MenuMapper extends BaseMapper<Menu> {
+    Integer queryMenuMaxOrderNum();
+
+    Integer queryMenuChildrenCountById(Integer id);
 }
